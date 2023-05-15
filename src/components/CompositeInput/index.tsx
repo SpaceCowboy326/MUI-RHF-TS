@@ -1,5 +1,5 @@
 import React from "react";
-import { UseFieldArrayReturn, useFieldArray, useFormContext } from "react-hook-form";
+import { UseFieldArrayProps, useFieldArray } from "react-hook-form";
 
 import type {
     SharedType,
@@ -10,12 +10,9 @@ interface HasSharedField {
     sharedField: SharedType[],
 }
 
-function CompositeInput() {
-    const {
-        control,
-    } = useFormContext<HasSharedField>();
 
-    const sharedField: UseFieldArrayReturn<HasSharedField, "sharedField"> = useFieldArray({
+function CompositeInput <T extends HasSharedField>({control, name}: UseFieldArrayProps<T>) {
+    const sharedField = useFieldArray({
         control,
         name: 'sharedField',
     });
